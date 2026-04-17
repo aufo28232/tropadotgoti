@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CEBOLINHA — Tropa do Goti</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dark-mode">
+
+  <!-- ========== CURSOR CUSTOMIZADO ========== -->
+  <div id="cursor"></div>
+  <div id="cursor-trail"></div>
+
+  <!-- ========== LOADING SCREEN ========== -->
+  <div id="loading-screen">
+    <div class="loading-inner">
+      <img src="https://i.ibb.co/3YsnFRcr/cebolinha-char.png" alt="Cebolinha" class="loading-avatar" onerror="this.style.display='none'" />
+      <div class="loading-name">CEBOLINHA</div>
+      <div class="loading-sub">Tropa do Goti 🐊</div>
+      <div class="loading-bar-wrap">
+        <div class="loading-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <!-- Avatar do Cebolinha no topo -->
+        <div class="nav-avatar-wrap">
+          <img
+            id="nav-avatar-img"
+            src="https://static-cdn.jtvnw.net/jtv_user_pictures/cebolinhofc_-profile_image-300x300.png"
+            alt="Cebolinha"
+            class="nav-avatar"
+            onerror="this.src='https://i.ibb.co/3YsnFRcr/cebolinha-char.png'"
+          />
+          <span class="nav-live-dot hidden" id="nav-live-indicator"></span>
+        </div>
+        <span class="nav-logo-text">CEBOLINHA</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#hero">Início</a></li>
+        <li><a href="#stats">Stats</a></li>
+        <li><a href="#calendario">Calendário</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#tropa">Tropa</a></li>
+        <li><a href="#clips">Clips</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle" title="Alternar tema">
+          <i class="fas fa-sun" id="theme-icon"></i>
+        </button>
+        <a href="https://www.twitch.tv/cebolinhofc_" target="_blank" class="btn-twitch-nav">
+          <i class="fab fa-twitch"></i> Twitch
+        </a>
+      </div>
+      <button class="nav-hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="#hero">Início</a>
+      <a href="#stats">Stats</a>
+      <a href="#calendario">Calendário</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#tropa">Tropa</a>
+      <a href="#clips">Clips</a>
+    </div>
+  </nav>
+
+  <!-- ========== SEÇÃO 1: HERO ========== -->
+  <section id="hero">
+    <!-- Partículas decorativas -->
+    <div class="particles" id="particles-container"></div>
+    <!-- Scanlines overlay -->
+    <div class="scanlines"></div>
+
+    <div class="hero-content">
+      <!-- Avatar com easter egg -->
+      <div class="hero-avatar-wrap" id="avatar-easter">
+        <div class="avatar-glow"></div>
+        <img
+          src="https://i.ibb.co/3YsnFRcr/cebolinha-char.png"
+          alt="Cebolinha personagem"
+          class="hero-avatar"
+          onerror="this.src='https://placehold.co/300x300/1a1a2e/39ff14?text=🎮'"
+        />
+        <div class="avatar-ring"></div>
+      </div>
+
+      <div class="hero-text">
+        <div class="hero-tag">Membro da Tropa do Goti 🐊</div>
+        <h1 class="hero-name" id="hero-name">CEBOLINHA</h1>
+        <p class="hero-desc">Do Free Fire ao caos — sempre entregando a vibe certa.</p>
+
+        <!-- Badge ao vivo -->
+        <div class="live-badge" id="live-badge">
+          <span class="live-dot" id="live-dot"></span>
+          <span id="live-text">⚫ OFFLINE</span>
+        </div>
+
+        <div class="hero-ctas">
+          <a href="https://www.twitch.tv/cebolinhofc_" target="_blank" class="btn-primary pulse-anim">
+            <i class="fab fa-twitch"></i> Assistir na Twitch
+          </a>
+          <button class="btn-secondary" onclick="document.getElementById('stats').scrollIntoView({behavior:'smooth'})">
+            Ver Stats <i class="fas fa-arrow-down"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Easter egg overlay -->
+    <div id="easter-egg-overlay" class="easter-overlay hidden">
+      <div class="easter-content">
+        <div class="easter-emoji">🎮</div>
+        <div class="easter-text">CEBOLINHA DETECTED</div>
+        <div class="easter-sub">você encontrou o easter egg secreto 👀</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SEÇÃO 2: STATS ========== -->
+  <section id="stats">
+    <div class="section-header reveal">
+      <span class="section-tag">Números</span>
+      <h2 class="section-title">PAINEL DE STATS</h2>
+      <p class="section-sub">Dados em tempo real da Twitch</p>
+    </div>
+
+    <!-- Loading state -->
+    <div id="stats-loading" class="stats-loading">
+      <div class="stats-loading-inner">
+        <div class="loading-spinner"></div>
+        <p>Carregando dados da Twitch...</p>
+      </div>
+    </div>
+
+    <!-- Error state -->
+    <div id="stats-error" class="stats-error hidden">
+      <i class="fas fa-exclamation-triangle"></i>
+      <p>Não foi possível carregar os dados. <button id="stats-retry">Tentar novamente</button></p>
+    </div>
+
+    <div class="stats-grid" id="stats-grid" style="display:none">
+      <!-- Card 1: Seguidores -->
+      <div class="stat-card highlight-card reveal">
+        <div class="stat-icon"><i class="fab fa-twitch"></i></div>
+        <div class="stat-value" id="stat-followers">—</div>
+        <div class="stat-label">Seguidores Twitch</div>
+        <div class="stat-bar"><div class="stat-bar-fill" id="bar-followers" style="width:0%"></div></div>
+      </div>
+      <!-- Card 2: Views total -->
+      <div class="stat-card reveal">
+        <div class="stat-icon"><i class="fas fa-eye"></i></div>
+        <div class="stat-value" id="stat-views">—</div>
+        <div class="stat-label">Views Totais</div>
+        <div class="stat-bar"><div class="stat-bar-fill" id="bar-views" style="width:0%"></div></div>
+      </div>
+      <!-- Card 3: Total VODs -->
+      <div class="stat-card reveal">
+        <div class="stat-icon"><i class="fas fa-gamepad"></i></div>
+        <div class="stat-value" id="stat-vods">—</div>
+        <div class="stat-label">Lives Realizadas</div>
+        <div class="stat-bar"><div class="stat-bar-fill" id="bar-vods" style="width:0%"></div></div>
+      </div>
+      <!-- Card 4: Horas transmitidas -->
+      <div class="stat-card reveal">
+        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+        <div class="stat-value" id="stat-hours">—</div>
+        <div class="stat-label">Horas Transmitidas</div>
+        <div class="stat-bar"><div class="stat-bar-fill" id="bar-hours" style="width:0%"></div></div>
+      </div>
+      <!-- Card 5: Dias seguidos -->
+      <div class="stat-card reveal">
+        <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+        <div class="stat-value" id="stat-streak">—</div>
+        <div class="stat-label">Dias Seguidos Atual</div>
+        <div class="stat-bar"><div class="stat-bar-fill" id="bar-streak" style="width:0%"></div></div>
+      </div>
+      <!-- Card 6: Maior sequência -->
+      <div class="stat-card reveal">
+        <div class="stat-icon"><i class="fas fa-fire"></i></div>
+        <div class="stat-value" id="stat-maxstreak">—</div>
+        <div class="stat-label">Maior Sequência</div>
+        <div class="stat-sub-label">dias</div>
+        <div class="stat-bar"><div class="stat-bar-fill" id="bar-maxstreak" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <p class="stats-note" id="stats-note" style="display:none">
+      <i class="fas fa-info-circle"></i>
+      Dados calculados a partir dos VODs desde início de Abril de 2025.
+    </p>
+  </section>
+
+  <!-- ========== SEÇÃO 3: CALENDÁRIO ========== -->
+  <section id="calendario">
+    <div class="section-header reveal">
+      <span class="section-tag">Histórico</span>
+      <h2 class="section-title">CALENDÁRIO DE LIVES</h2>
+      <p class="section-sub">Cada quadrado é uma batalha</p>
+    </div>
+
+    <!-- Loading -->
+    <div id="cal-loading" class="stats-loading">
+      <div class="stats-loading-inner">
+        <div class="loading-spinner"></div>
+        <p>Carregando histórico de lives...</p>
+      </div>
+    </div>
+
+    <div class="calendar-wrap reveal" id="cal-wrap" style="display:none">
+      <div class="calendar-header">
+        <button id="cal-prev"><i class="fas fa-chevron-left"></i></button>
+        <div class="cal-title" id="cal-title">Abril 2025</div>
+        <button id="cal-next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+
+      <div class="calendar-legend">
+        <div class="legend-item"><span class="legend-box live-day"></span> Live normal</div>
+        <div class="legend-item"><span class="legend-box long-day"></span> Live longa (+4h)</div>
+        <div class="legend-item"><span class="legend-box no-day"></span> Sem live</div>
+      </div>
+
+      <div class="calendar-weekdays">
+        <span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span>
+        <span>Qui</span><span>Sex</span><span>Sáb</span>
+      </div>
+
+      <div class="calendar-grid" id="calendar-grid"></div>
+    </div>
+
+    <!-- Tooltip do calendário -->
+    <div id="cal-tooltip" class="cal-tooltip hidden"></div>
+  </section>
+
+  <!-- ========== SEÇÃO 4: GALERIA / SOBRE ========== -->
+  <section id="galeria">
+    <div class="section-header reveal">
+      <span class="section-tag">Sobre</span>
+      <h2 class="section-title">GALERIA</h2>
+      <p class="section-sub">Momentos reais de um streamer autêntico</p>
+    </div>
+
+    <div class="galeria-layout">
+      <div class="galeria-grid reveal">
+        <div class="galeria-item" data-src="https://i.ibb.co/gMV2SCf1/foto1.jpg">
+          <img src="https://i.ibb.co/gMV2SCf1/foto1.jpg" alt="Cebolinha foto 1"
+            onerror="this.src='https://placehold.co/400x300/1a1a2e/39ff14?text=📸'" />
+          <div class="galeria-overlay">
+            <i class="fas fa-eye"></i>
+          </div>
+        </div>
+        <div class="galeria-item" data-src="https://i.ibb.co/3YRw7Vbr/foto2.jpg">
+          <img src="https://i.ibb.co/3YRw7Vbr/foto2.jpg" alt="Cebolinha foto 2"
+            onerror="this.src='https://placehold.co/400x500/1a1a2e/39ff14?text=📸'" />
+          <div class="galeria-overlay">
+            <i class="fas fa-eye"></i>
+          </div>
+        </div>
+        <div class="galeria-item" data-src="https://i.ibb.co/vCzmsLtS/foto3.jpg">
+          <img src="https://i.ibb.co/vCzmsLtS/foto3.jpg" alt="Cebolinha foto 3"
+            onerror="this.src='https://placehold.co/400x400/1a1a2e/39ff14?text=📸'" />
+          <div class="galeria-overlay">
+            <i class="fas fa-eye"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="galeria-text reveal">
+        <div class="galeria-quote">"</div>
+        <p>
+          Cebolinha é um dos streamers mais autênticos da Tropa do Goti.
+          Do Free Fire ao caos, sempre entregando. Sem filtro, sem script —
+          só vibes reais e muito conteúdo de qualidade.
+        </p>
+        <div class="galeria-tags">
+          <span>#TropaDoGoti</span>
+          <span>#FreeFire</span>
+          <span>#Gaming</span>
+          <span>#Caos</span>
+        </div>
+        <div class="galeria-social-btns">
+          <a href="https://www.twitch.tv/cebolinhofc_" target="_blank" class="btn-primary">
+            <i class="fab fa-twitch"></i> Acompanhar
+          </a>
+          <a href="https://www.instagram.com/cebolinhaff_ofc/" target="_blank" class="btn-instagram">
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox hidden">
+      <button class="lightbox-close" id="lightbox-close"><i class="fas fa-times"></i></button>
+      <img id="lightbox-img" src="" alt="Foto ampliada" />
+    </div>
+  </section>
+
+  <!-- ========== SEÇÃO 5: TROPA DO GOTI ========== -->
+  <section id="tropa">
+    <div class="section-header reveal">
+      <span class="section-tag">Família</span>
+      <h2 class="section-title">TROPA DO GOTI 🐊</h2>
+      <p class="section-sub">Unidos no caos, fortes na tela</p>
+    </div>
+
+    <div class="tropa-grid tropa-single">
+      <!-- Cebolinha — destaque único -->
+      <div class="tropa-card featured reveal" data-delay="0">
+        <div class="tropa-card-glow"></div>
+        <div class="tropa-avatar tropa-avatar-lg">
+          <img
+            id="tropa-avatar-img"
+            src="https://static-cdn.jtvnw.net/jtv_user_pictures/cebolinhofc_-profile_image-300x300.png"
+            alt="Cebolinha"
+            onerror="this.src='https://i.ibb.co/3YsnFRcr/cebolinha-char.png'"
+          />
+        </div>
+        <div class="tropa-badge">⭐ DESTAQUE</div>
+        <div class="tropa-name">Cebolinha</div>
+        <div class="tropa-handle">@cebolinhofc_</div>
+        <div class="tropa-role">Streamer · Free Fire · Tropa do Goti</div>
+        <div class="tropa-social-links">
+          <a href="https://www.twitch.tv/cebolinhofc_" target="_blank" class="tropa-link">
+            <i class="fab fa-twitch"></i> Twitch
+          </a>
+          <a href="https://www.instagram.com/cebolinhaff_ofc/" target="_blank" class="tropa-link tropa-link-ig">
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SEÇÃO 6: CLIPS / MELHORES MOMENTOS ========== -->
+  <section id="clips">
+    <div class="section-header reveal">
+      <span class="section-tag">Conteúdo</span>
+      <h2 class="section-title">MELHORES MOMENTOS</h2>
+      <p class="section-sub">Os clips mais épicos do Cebolinha</p>
+    </div>
+
+    <!-- Clip destaque -->
+    <div class="clip-featured reveal">
+      <div class="clip-featured-embed">
+        <iframe
+          src="https://clips.twitch.tv/embed?clip=SplendidArborealMushroomThisIsSparta-2R6IP6fnwm8pn2Hj&parent=localhost&parent=127.0.0.1&autoplay=false"
+          frameborder="0"
+          allowfullscreen
+          scrolling="no"
+          allow="autoplay; fullscreen"
+          title="Clip destaque Cebolinha"
+        ></iframe>
+      </div>
+      <div class="clip-featured-label">
+        <span class="clip-featured-tag">🔥 CLIP EM DESTAQUE</span>
+        <p>Assista ao melhor momento do Cebolinha</p>
+      </div>
+    </div>
+
+    <div class="clips-grid">
+      <!-- Clip 2 -->
+      <div class="clip-card reveal">
+        <div class="clip-embed-wrap">
+          <iframe
+            src="https://clips.twitch.tv/embed?clip=CalmPluckyUdonPartyTime-WCeVYLc4YifsH1GF&parent=localhost&parent=127.0.0.1&autoplay=false"
+            frameborder="0"
+            allowfullscreen
+            scrolling="no"
+            allow="autoplay; fullscreen"
+            title="Clip 2 Cebolinha"
+          ></iframe>
+        </div>
+        <div class="clip-info">
+          <div class="clip-meta"><i class="fab fa-twitch"></i> Twitch Clip</div>
+        </div>
+      </div>
+
+      <!-- Clip 3 -->
+      <div class="clip-card reveal">
+        <div class="clip-embed-wrap">
+          <iframe
+            src="https://clips.twitch.tv/embed?clip=MoistSmoothCaterpillarTakeNRG-zl19ETwIwe1zoODB&parent=localhost&parent=127.0.0.1&autoplay=false"
+            frameborder="0"
+            allowfullscreen
+            scrolling="no"
+            allow="autoplay; fullscreen"
+            title="Clip 3 Cebolinha"
+          ></iframe>
+        </div>
+        <div class="clip-info">
+          <div class="clip-meta"><i class="fab fa-twitch"></i> Twitch Clip</div>
+        </div>
+      </div>
+
+      <!-- Clip 4 -->
+      <div class="clip-card reveal">
+        <div class="clip-embed-wrap">
+          <iframe
+            src="https://clips.twitch.tv/embed?clip=CrepuscularBelovedFalconDoggo-mthMPETuSHWxy_2S&parent=localhost&parent=127.0.0.1&autoplay=false"
+            frameborder="0"
+            allowfullscreen
+            scrolling="no"
+            allow="autoplay; fullscreen"
+            title="Clip 4 Cebolinha"
+          ></iframe>
+        </div>
+        <div class="clip-info">
+          <div class="clip-meta"><i class="fab fa-twitch"></i> Twitch Clip</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clips-cta reveal">
+      <a href="https://www.twitch.tv/cebolinhofc_/clips" target="_blank" class="btn-secondary">
+        Ver todos os clips <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <div class="footer-avatar-wrap">
+          <img
+            src="https://static-cdn.jtvnw.net/jtv_user_pictures/cebolinhofc_-profile_image-300x300.png"
+            alt="Cebolinha"
+            class="footer-avatar"
+            onerror="this.src='https://i.ibb.co/3YsnFRcr/cebolinha-char.png'"
+          />
+        </div>
+        <span class="footer-name">CEBOLINHA</span>
+        <span class="footer-sub">Tropa do Goti</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="https://www.twitch.tv/cebolinhofc_" target="_blank" title="Twitch">
+          <i class="fab fa-twitch"></i>
+        </a>
+        <a href="https://www.instagram.com/cebolinhaff_ofc/" target="_blank" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+
+      <div class="footer-copy">
+        Site feito com amor pela comunidade 💚 · <span id="footer-year"></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
